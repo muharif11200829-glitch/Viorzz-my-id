@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Viorzz AI MultiDevice 🍀</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+--primary:#ff0000;
+--secondary:#990000;
+--dark:#050505;
+--card:rgba(255,255,255,.06);
+--border:rgba(255,0,0,.25);
+--text:#ffffff;
+}
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+scroll-behavior:smooth;
+}
+
+body{
+background:#050505;
+color:#fff;
+overflow-x:hidden;
+}
+
+body::-webkit-scrollbar{
+width:6px;
+}
+
+body::-webkit-scrollbar-thumb{
+background:red;
+border-radius:10px;
+}
+
+.bg{
+position:fixed;
+inset:0;
+background:
+radial-gradient(circle at top,#500000,#050505 60%);
+z-index:-2;
+}
+
+.loading{
+position:fixed;
+inset:0;
+background:#000;
+display:flex;
+justify-content:center;
+align-items:center;
+z-index:9999;
+transition:.6s;
+}
+
+.loader{
+width:80px;
+height:80px;
+border:5px solid rgba(255,255,255,.1);
+border-top:5px solid red;
+border-radius:50%;
+animation:spin 1s linear infinite;
+}
+
+@keyframes spin{
+100%{
+transform:rotate(360deg);
+}
+}
+
+.navbar{
+position:sticky;
+top:0;
+z-index:999;
+backdrop-filter:blur(12px);
+background:rgba(0,0,0,.5);
+border-bottom:1px solid rgba(255,0,0,.2);
+}
+
+.navbar ul{
+display:flex;
+justify-content:center;
+gap:20px;
+padding:15px;
+list-style:none;
+flex-wrap:wrap;
+}
+
+.navbar a{
+text-decoration:none;
+color:#fff;
+font-size:14px;
+}
+
+header{
+padding:50px 20px;
+text-align:center;
+}
+
+.profile{
+width:140px;
+height:140px;
+border-radius:50%;
+object-fit:cover;
+border:4px solid red;
+box-shadow:0 0 30px rgba(255,0,0,.4);
+}
+
+header h1{
+margin-top:15px;
+font-size:32px;
+}
+
+header p{
+opacity:.8;
+}
+
+.stats{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(140px,1fr));
+gap:15px;
+margin-top:30px;
+}
+
+.stat{
+background:var(--card);
+padding:15px;
+border-radius:15px;
+border:1px solid var(--border);
+}
+
+.section{
+padding:20px;
+max-width:1300px;
+margin:auto;
+}
+
+.section-title{
+margin-bottom:20px;
+font-size:25px;
+text-align:center;
+}
+
+.card{
+background:var(--card);
+border:1px solid var(--border);
+border-radius:20px;
+padding:20px;
+backdrop-filter:blur(12px);
+}
+
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:20px;
+}
+
+.product{
+background:rgba(255,255,255,.04);
+border-radius:20px;
+padding:15px;
+border:1px solid rgba(255,0,0,.15);
+transition:.3s;
+}
+
+.product:hover{
+transform:translateY(-5px);
+box-shadow:0 0 25px rgba(255,0,0,.25);
+}
+
+.thumb{
+width:100%;
+height:180px;
+overflow:hidden;
+border-radius:15px;
+background:#111;
+}
+
+.thumb img{
+width:100%;
+height:100%;
+object-fit:cover;
+transition:.4s;
+}
+
+.product:hover img{
+transform:scale(1.08);
+}
+
+.product h3{
+margin-top:10px;
+}
+
+.price{
+color:#ff4d4d;
+font-weight:bold;
+margin:8px 0;
+}
+
+.btn{
+display:block;
+width:100%;
+padding:12px;
+border:none;
+border-radius:12px;
+background:linear-gradient(45deg,#8b0000,#ff0000);
+color:white;
+text-decoration:none;
+text-align:center;
+margin-top:10px;
+cursor:pointer;
+font-weight:600;
+}
+
+.btn:hover{
+opacity:.9;
+}
+
+.socials{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:15px;
+}
+
+.countdown{
+text-align:center;
+font-size:20px;
+font-weight:bold;
+color:#ff4d4d;
+margin-top:15px;
+}
+
+.modal{
+display:none;
+position:fixed;
+inset:0;
+background:rgba(0,0,0,.8);
+justify-content:center;
+align-items:center;
+z-index:9999;
+padding:20px;
+}
+
+.modal-content{
+max-width:450px;
+width:100%;
+background:#111;
+padding:25px;
+border-radius:20px;
+border:1px solid rgba(255,0,0,.4);
+}
+
+.close{
+float:right;
+font-size:28px;
+cursor:pointer;
+}
+
+.copy-box{
+margin-top:10px;
+padding:12px;
+background:#1a1a1a;
+border-radius:10px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+}
+
+footer{
+text-align:center;
+padding:30px;
+opacity:.7;
+}
+
+.top{
+position:fixed;
+bottom:20px;
+right:20px;
+width:50px;
+height:50px;
+background:red;
+border:none;
+border-radius:50%;
+cursor:pointer;
+display:none;
+color:white;
+font-size:20px;
+}
+</style>
+</head>
+<body>
+
+<div class="loading" id="loading">
+<div class="loader"></div>
+</div>
+
+<div class="bg"></div>
+
+<audio autoplay loop controls style="width:100%">
+<source src="https://raw.githubusercontent.com/ZrooPro/SaveDat2/main/uploads/20260622_133053_959_8wdfzzys.mp3">
+</audio>
+
+<nav class="navbar">
+<ul>
+<li><a href="#premium">Premium</a></li>
+<li><a href="#vvip">VVIP</a></li>
+<li><a href="#sewabot">Sewa Bot</a></li>
+<li><a href="#payment">Pembayaran</a></li>
+<li><a href="#social">Sosial</a></li>
+</ul>
+</nav>
+
+<header>
+
+<img src="https://img2.pixhost.to/images/8804/741939829_alip-1782130317665.jpg" class="profile">
+
+<h1>Viorzz AI MultiDevice 🍀</h1>
+
+<p>Aman Dan Terpercaya 100%</p>
+
+<div class="countdown">
+Promo Berakhir Dalam:
+<span id="timer"></span>
+</div>
+
+<div class="stats">
+
+<div class="stat">
+<h2>799+</h2>
+<p>User Bot</p>
+</div>
+
+<div class="stat">
+<h2>100</h2>
+<p>Group Bot</p>
+</div>
+
+<div class="stat">
+<h2>24/7</h2>
+<p>Online</p>
+</div>
+
+</div>
+
+</header>
+
+<section class="section">
+<div class="card">
+<h2 class="section-title">📌 Informasi Owner</h2>
+<p>
+Nama : Viorzz Developer 👑<br>
+WhatsApp : 083162070427<br>
+Status : Developer WhatsApp Bot<br>
+Deskripsi : OPEN ALL HOSTING
+</p>
+</div>
+</section>
+
+<section class="section" id="premium">
+<h2 class="section-title">💎 Akses Premium</h2>
+
+<div class="grid">
+
+<div class="product">
+<div class="thumb"><img src="https://img2.pixhost.to/images/8804/741940983_alip-1782130711126.jpg"></div>
+<h3>Premium 7 Hari</h3>
+<p class="price">Rp 10.000</p>
+<a class="btn" href="https://wa.me/6283162070427?text=Halo%20Kak%20%F0%9F%91%8B%0A%0ASaya%20ingin%20melakukan%20pemesanan.%0A%0A━━━━━━━━━━━━━━━━━━%0A📦%20Produk%20:%20Akses%20Premium%20Bot%0A📅%20Paket%20:%207%20Hari%0A💰%20Harga%20:%20Rp%2010.000%0A👤%20Nama%20:%20%0A📱%20Nomor%20WhatsApp%20:%20%0A🌍%20Asal%20:%20%0A💳%20Metode%20Pembayaran%20:%20QRIS/DANA/OVO/GOPAY%0A━━━━━━━━━━━━━━━━━━%0A%0AMohon%20diproses%20Kak%20🙏">Order Sekarang</a>
+</div>
+
+<div class="product">
+<div class="thumb"><img src="https://img2.pixhost.to/images/8804/741940983_alip-1782130711126.jpg"></div>
+<h3>Premium 1 Bulan</h3>
+<p class="price">Rp 20.000</p>
+<a class="btn" href="https://wa.me/6283162070427?text=Halo%20Kak%20%F0%9F%91%8B%0A%0ASaya%20ingin%20melakukan%20pemesanan.%0A%0A━━━━━━━━━━━━━━━━━━%0A📦%20Produk%20:%20Akses%20Premium%20Bot%0A📅%20Paket%20:%201%20Bulan%0A💰%20Harga%20:%20Rp%2020.000%0A👤%20Nama%20:%20%0A📱%20Nomor%20WhatsApp%20:%20%0A🌍%20Asal%20:%20%0A💳%20Metode%20Pembayaran%20:%20QRIS/DANA/OVO/GOPAY%0A━━━━━━━━━━━━━━━━━━%0A%0AMohon%20diproses%20Kak%20🙏">Order</a>
+</div>
+
+<div class="product">
+<div class="thumb"><img src="https://img2.pixhost.to/images/8804/741940983_alip-1782130711126.jpg"></div>
+<h3>Premium 2 Bulan</h3>
+<p class="price">Rp 30.000</p>
+<a class="btn" href="https://wa.me/6283162070427?text=Halo%20Kak%20%F0%9F%91%8B%0A%0ASaya%20ingin%20melakukan%20pemesanan.%0A%0A━━━━━━━━━━━━━━━━━━%0A📦%20Produk%20:%20Akses%20Premium%20Bot%0A📅%20Paket%20:%202%20Bulan%0A💰%20Harga%20:%20Rp%2030.000%0A👤%20Nama%20:%20%0A📱%20Nomor%20WhatsApp%20:%20%0A🌍%20Asal%20:%20%0A💳%20Metode%20Pembayaran%20:%20QRIS/DANA/OVO/GOPAY%0A━━━━━━━━━━━━━━━━━━%0A%0AMohon%20diproses%20Kak%20🙏">Order</a>
+</div>
+
+<div class="product">
+<div class="thumb"><img src="https://img2.pixhost.to/images/8804/741940983_alip-1782130711126.jpg"></div>
+<h3>Premium 3 Bulan</h3>
+<p class="price">Rp 40.000</p>
+<a class="btn" href="https://wa.me/6283162070427?text=Halo%20Kak%20%F0%9F%91%8B%0A%0ASaya%20ingin%20melakukan%20pemesanan.%0A%0A━━━━━━━━━━━━━━━━━━%0A📦%20Produk%20:%20Akses%20Premium%20Bot%0A📅%20Paket%20:%203%20Bulan%0A💰%20Harga%20:%20Rp%2040.000%0A👤%20Nama%20:%20%0A📱%20Nomor%20WhatsApp%20:%20%0A🌍%20Asal%20:%20%0A💳%20Metode%20Pembayaran%20:%20QRIS/DANA/OVO/GOPAY%0A━━━━━━━━━━━━━━━━━━%0A%0AMohon%20diproses%20Kak%20🙏">Order</a>
+</div>
+
+<div class="product">
+<div class="thumb"><img src="https://img2.pixhost.to/images/8804/741940983_alip-1782130711126.jpg"></div>
+<h3>Premium Permanent</h3>
+<p class="price">Rp 45.000</p>
+<a class="btn" href="https://wa.me/6283162070427?text=Halo%20Kak%20%F0%9F%91%8B%0A%0ASaya%20ingin%20melakukan%20pemesanan.%0A%0A━━━━━━━━━━━━━━━━━━%0A📦%20Produk%20:%20Akses%20Premium%20Bot%0A📅%20Paket%20:%20%20Permanent%0A💰%20Harga%20:%20Rp%2045.000%0A👤%20Nama%20:%20%0A📱%20Nomor%20WhatsApp%20:%20%0A🌍%20Asal%20:%20%0A💳%20Metode%20Pembayaran%20:%20QRIS/DANA/OVO/GOPAY%0A━━━━━━━━━━━━━━━━━━%0A%0AMohon%20diproses%20Kak%20🙏">Order</a>
+</div>
+
+</div>
+</section>
+
+<section class="section" id="vvip">
+<h2 class="section-title">👑 Akses VVIP</h2>
+
+<div class="grid">
+
+<div class="product">
+<div class="thumb"><img src="https://img2.pixhost.to/images/8805/741958317_alip-1782136266430.jpg"></div>
+<h3>VVIP 7 Hari</h3>
+<p class="price">Rp 10.000</p>
+<a class="btn" href="https://wa.me/6283162070427?text=Halo%20Kak%20%F0%9F%91%8B%0A%0ASaya%20ingin%20melakukan%20pemesanan.%0A%0A━━━━━━━━━━━━━━━━━━%0A📦%20Produk%20:%20Akses%20VVIP%20Bot%0A📅%20Paket%20:%207%20Hari%0A💰%20Harga%20:%20Rp%2010.000%0A👤%20Nama%20:%20%0A📱%20Nomor%20WhatsApp%20:%20%0A🌍%20Asal%20:%20%0A💳%20Metode%20Pembayaran%20:%20QRIS/DANA/OVO/GOPAY%0A━━━━━━━━━━━━━━━━━━%0A%0AMohon%20diproses%20Kak%20🙏">Order</a>
+</div>
+
+<div class="product">
+<div class="thumb"><img src="https://img2.pixhost.to/images/8805/741958317_alip-1782136266430.jpg"></div>
+<h3>VVIP 1 Bulan</h3>
+<p class="price">Rp 20.000</p>
+<a class="btn" href="https://wa.me/6283162070427?text=Halo%20Kak%20%F0%9F%91%8B%0A%0ASaya%20ingin%20melakukan%20pemesanan.%0A%0A━━━━━━━━━━━━━━━━━━%0A📦%20Produk%20:%20Akses%20VVIP%20Bot%0A📅%20Paket%20:%201%20Bulan%0A💰%20Harga%20:%20Rp%2020.000%0A👤%20Nama%20:%20%0A📱%20Nomor%20WhatsApp%20:%20%0A🌍%20Asal%20:%20%0A💳%20Metode%20Pembayaran%20:%20QRIS/DANA/OVO/GOPAY%0A━━━━━━━━━━━━━━━━━━%0A%0AMohon%20diproses%20Kak%20🙏">Order</a>
+</div>
+
+<div class="product">
+<div class="thumb"><img src="https://img2.pixhost.to/images/8805/741958317_alip-1782136266430.jpg"></div>
+<h3>VVIP 2 Bulan</h3>
+<p class="price">Rp 30.000</p>
+<a class="btn" href="https://wa.me/6283162070427?text=Halo%20Kak%20%F0%9F%91%8B%0A%0ASaya%20ingin%20melakukan%20pemesanan.%0A%0A━━━━━━━━━━━━━━━━━━%0A📦%20Produk%20:%20Akses%20VVIP%20Bot%0A📅%20Paket%20:%202%20Bulan%0A💰%20Harga%20:%20Rp%2030.000%0A👤%20Nama%20:%20%0A📱%20Nomor%20WhatsApp%20:%20%0A🌍%20Asal%20:%20%0A💳%20Metode%20Pembayaran%20:%20QRIS/DANA/OVO/GOPAY%0A━━━━━━━━━━━━━━━━━━%0A%0AMohon%20diproses%20Kak%20🙏">Order</a>
+</div>
+
+<div class="product">
+<div class="thumb"><img src="https://img2.pixhost.to/images/8805/741958317_alip-1782136266430.jpg"></div>
+<h3>VVIP 3 Bulan</h3>
+<p class="price">Rp 40.000</p>
+<a class="btn" href="https://wa.me/6283162070427?text=Halo%20Kak%20%F0%9F%91%8B%0A%0ASaya%20ingin%20melakukan%20pemesanan.%0A%0A━━━━━━━━━━━━━━━━━━%0A📦%20Produk%20:%20Akses%20VVIP%20Bot%0A📅%20Paket%20:%203%20Bulan%0A💰%20Harga%20:%20Rp%2040.000%0A👤%20Nama%20:%20%0A📱%20Nomor%20WhatsApp%20:%20%0A🌍%20Asal%20:%20%0A💳%20Metode%20Pembayaran%20:%20QRIS/DANA/OVO/GOPAY%0A━━━━━━━━━━━━━━━━━━%0A%0AMohon%20diproses%20Kak%20🙏">Order</a>
+</div>
+
+<div class="product">
+<div class="thumb"><img src="https://img2.pixhost.to/images/8805/741958317_alip-1782136266430.jpg"></div>
+<h3>VVIP Permanent</h3>
+<p class="price">Rp 50.000</p>
+<a class="btn" href="https://wa.me/6283162070427?text=Halo%20Kak%20%F0%9F%91%8B%0A%0ASaya%20ingin%20melakukan%20pemesanan.%0A%0A━━━━━━━━━━━━━━━━━━%0A📦%20Produk%20:%20Akses%20VVIP%20Bot%0A📅%20Paket%20:%20%20Permanent%0A💰%2050.000%20:%20Rp%20HARGA%0A👤%20Nama%20:%20%0A📱%20Nomor%20WhatsApp%20:%20%0A🌍%20Asal%20:%20%0A💳%20Metode%20Pembayaran%20:%20QRIS/DANA/OVO/GOPAY%0A━━━━━━━━━━━━━━━━━━%0A%0AMohon%20diproses%20Kak%20🙏">Order</a>
+</div>
+
+</div>
+</section>
+
+<section class="section" id="sewabot">
+<h2 class="section-title">🤖 Sewa Bot</h2>
+
+<div class="grid">
+
+<div class="product">
+<div class="thumb"><img src="https://img2.pixhost.to/images/8806/741959741_alip-1782136881041.jpg"></div>
+<h3>Sewa Bot 1 Bulan</h3>
+<p class="price">Rp 30.000</p>
+<a class="btn" href="https://wa.me/6283162070427?text=Halo%20Kak%20%F0%9F%91%8B%0A%0ASaya%20ingin%20melakukan%20pemesanan.%0A%0A━━━━━━━━━━━━━━━━━━%0A📦%20Produk%20:%20Akses%20Sewabot%20Bot%0A📅%20Paket%20:%201%20Bulan%0A💰%20Harga%20:%20Rp%2030.000%0A👤%20Nama%20:%20%0A📱%20Nomor%20WhatsApp%20:%20%0A🌍%20Asal%20:%20%0A💳%20Metode%20Pembayaran%20:%20QRIS/DANA/OVO/GOPAY%0A━━━━━━━━━━━━━━━━━━%0A%0AMohon%20diproses%20Kak%20🙏">Order</a>
+</div>
+
+<div class="product">
+<div class="thumb"><img src="https://img2.pixhost.to/images/8806/741959741_alip-1782136881041.jpg"></div>
+<h3>Sewa Bot Permanent</h3>
+<p class="price">Rp 60.000</p>
+<a class="btn" href="https://wa.me/6283162070427?text=Halo%20Kak%20%F0%9F%91%8B%0A%0ASaya%20ingin%20melakukan%20pemesanan.%0A%0A━━━━━━━━━━━━━━━━━━%0A📦%20Produk%20:%20Akses%20Sewabot%20Bot%0A📅%20Paket%20:%20%20Permanent%0A💰%20Harga%20:%20Rp%2060.000%0A👤%20Nama%20:%20%0A📱%20Nomor%20WhatsApp%20:%20%0A🌍%20Asal%20:%20%0A💳%20Metode%20Pembayaran%20:%20QRIS/DANA/OVO/GOPAY%0A━━━━━━━━━━━━━━━━━━%0A%0AMohon%20diproses%20Kak%20🙏">Order</a>
+</div>
+
+</div>
+</section>
+
+<section class="section" id="payment">
+<div class="card">
+
+<h2 class="section-title">💳 Pembayaran</h2>
+
+<a class="btn" onclick="openModal()">Lihat QRIS</a>
+
+<div class="copy-box">
+<span>NO DANA VIORZZ 👑</span>
+<button onclick="copyText('0882022257311')">Copy</button>
+</div>
+
+<div class="copy-box">
+<span>TIDAK TERSEDIA</span>
+<button onclick="copyText('[NOMOR_OVO]')">Copy</button>
+</div>
+
+<div class="copy-box">
+<span>TIDAK TERSEDIA</span>
+<button onclick="copyText('[NOMOR_GOPAY]')">Copy</button>
+</div>
+
+</div>
+</section>
+
+<section class="section" id="social">
+
+<h2 class="section-title">🌐 Sosial Media</h2>
+
+<div class="socials">
+
+<a class="btn" href="https://wa.me/6283162070427">WhatsApp Developer 👑</a>
+<a class="btn" href="https://whatsapp.com/channel/0029Vb7ip1S3GJP1TXbjBr1r">Saluran › ׁ 𝗏𝗂𝗇𝗓𝗓 - 𝖺𝗂 𝗆𝗎𝗅𝗍𝗂𝖽𝖾𝗏𝗂𝖼𝖾 🍥</a>
+<a class="btn" href="https://whatsapp.com/channel/0029VbCgckX65yDI25iXW40H">Saluran › ׁ 𝗏𝗂𝗈𝗋𝗓𝗓 - 𝗆𝗎𝗅𝗍𝗂𝖽𝖾𝗏𝗂𝖼𝖾 🍀</a>
+<a class="btn" href="https://chat.whatsapp.com/JABHiYj6qfw8JvBisIieTS">Grup Bot Whatsapp</a>
+<a class="btn" href="https://www.instagram.com/mh_arif2829?igsh=MTM0eDNjbmZkdDh4Mg==">Instagram Viorzz</a>
+<a class="btn" href="tiktok.com/@ini.vio.cuyy">TikTok Viorzz</a>
+<a class="btn" href="https://www.youtube.com/@Viorzz_ID">YouTube Viorzz ID</a>
+
+</div>
+
+</section>
+
+<div class="modal" id="modal">
+<div class="modal-content">
+<span class="close" onclick="closeModal()">&times;</span>
+
+<h2>QRIS Pembayaran</h2>
+
+<img src="https://img2.pixhost.to/images/8805/741954337_alip-1782134794922.jpg" style="width:100%;border-radius:15px;margin-top:15px;">
+
+</div>
+</div>
+
+<button class="top" id="topBtn">↑</button>
+
+<footer>
+© 2026 Viorzz AI MultiDevice 🍀
+</footer>
+
+<script>
+
+window.onload=()=>{
+document.getElementById("loading").style.opacity="0";
+setTimeout(()=>{
+document.getElementById("loading").style.display="none";
+},500);
+}
+
+function openModal(){
+document.getElementById("modal").style.display="flex";
+}
+
+function closeModal(){
+document.getElementById("modal").style.display="none";
+}
+
+function copyText(text){
+navigator.clipboard.writeText(text);
+alert("Berhasil Disalin");
+}
+
+let countDownDate=new Date().getTime()+86400000*7;
+
+setInterval(()=>{
+let now=new Date().getTime();
+let distance=countDownDate-now;
+
+let d=Math.floor(distance/(1000*100*60*24));
+let h=Math.floor((distance%(1000*60*60*24))/(1000*60*60));
+let m=Math.floor((distance%(1000*60*60))/(1000*60));
+let s=Math.floor((distance%(1000*60))/1000);
+
+document.getElementById("timer").innerHTML=
+d+" Hari "+h+" Jam "+m+" Menit "+s+" Detik";
+
+},1000);
+
+let topBtn=document.getElementById("topBtn");
+
+window.onscroll=()=>{
+if(document.documentElement.scrollTop>300){
+topBtn.style.display="block";
+}else{
+topBtn.style.display="none";
+}
+}
+
+topBtn.onclick=()=>{
+window.scrollTo({
+top:0,
+behavior:"smooth"
+});
+}
+
+</script>
+
+</body>
+</html>
